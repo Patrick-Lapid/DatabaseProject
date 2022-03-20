@@ -4,6 +4,7 @@
 
 ### Install Required Python Modules
 
+Create external python virtual environment then run this command
 ```bash
 pip install -r requirements.txt
 ```
