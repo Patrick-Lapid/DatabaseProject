@@ -1,16 +1,51 @@
 import React, { Component } from "react";
-import {render} from "react-dom";
+import LandingPage from '../pages/landing-page'
+import DataExplorationPage from '../pages/data-exploration-page'
+import ResourcesPage from '../pages/resources-page'
+import Navbar from "./navbar";
 
-export default class App extends Component {
-    constructor(props){
-        super(props);
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from 'react-router-dom';
 
-    }
 
-    render(){
-        return <h1>Testing React Code</h1>;
-    }
+function App() {
+    
+    return (
+
+        <>
+            <Router>
+                {/* Simple Navbar present in each page */}
+                <Navbar />
+                
+                {/* URL Handling */}
+                <Routes>
+
+                    {/* Landing Page */}
+                    <Route path="/" element={
+                        <LandingPage />
+                    } />
+
+                    {/* Data Exploration Page */}
+                    <Route path="/data-exploration" element={
+                        <DataExplorationPage />
+                    } />
+
+                    {/* Resources Page */}
+                    <Route path="/resources" element={
+                        <ResourcesPage />
+                    } />
+
+                </Routes>
+
+            </Router>
+
+        </>
+
+    )
+    
 }
 
-const appDiv = document.getElementById("app");
-render(<App />, appDiv);
+export default App;
