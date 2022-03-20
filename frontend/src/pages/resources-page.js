@@ -7,7 +7,7 @@ function ResourcesPage() {
             <section className="landing-main">
                 <div className='flex-container'>
                     <h1>Analysis of Gun Violence in the United States</h1>
-                    <div className='resources-item'>
+                    <div className='container-item'>
                         <h2>
                             Desription of Dataset:
                         </h2>
@@ -25,7 +25,7 @@ function ResourcesPage() {
                         <a href='https://github.com/jamesqo/gun-violence-data'>Link to Dataset</a> 
                     </div>
 
-                    <div className='resources-item'>
+                    <div className='container-item'>
                         <h2>Project Description:</h2>
 
                         <h3>Purpose:</h3>

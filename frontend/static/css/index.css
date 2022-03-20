@@ -27,7 +27,7 @@ body {
   justify-content: space-around;
   align-items: center;
   min-height: 8vh;
-  background-color: grey;
+  background-color: #1F373E;
 }
 
 .navbar-logo {
@@ -58,11 +58,9 @@ body {
   font-size: 14px;
 }
 
-/* LANDING PAGE STYLING */
-
 /* DATA-EXPLORATION PAGE STYLING */
 
-/* RESOURCES PAGE STYLING */
+/* LANDING PAGE / RESOURCES PAGE STYLING */
 
 .flex-container {
   display: flex;
@@ -70,11 +68,16 @@ body {
   padding: 2rem;
 }
 
-.resources-item {
+.container-item {
   margin-top: 2rem;
-  background-color: #c4c4c4;
+  background-color: #335C67;
   padding: 2rem;
   border-radius: 2rem;
+  color: white;
+}
+
+a {
+  color: white;
 }
 
 ul {
