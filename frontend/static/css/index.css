@@ -63,3 +63,22 @@ body {
 /* DATA-EXPLORATION PAGE STYLING */
 
 /* RESOURCES PAGE STYLING */
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.resources-item {
+  margin-top: 2rem;
+  background-color: #c4c4c4;
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
