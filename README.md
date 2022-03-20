@@ -11,8 +11,9 @@ pip install -r requirements.txt
 
 To start the web server you need to run the following sequence of commands.
 
-First cd into your desired  folder (replace x with folder).
+First cd into DatabaseProject.
 
+Only run this when updating database
 ```bash
 python manage.py makemigrations
 python manage.py migrate
@@ -44,7 +45,6 @@ npm install react-router-dom
 
 Run the production compile script
 
-or for development:
 ```bash
 npm run dev
 ```
