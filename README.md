@@ -54,8 +54,13 @@ npm run dev
 
 ### To-Do
 Create models, Connecting Oracle Database - Andy
+<br>
 Clean Data from excel then bulk load CSVs into Oracle - Andy and Patrick
+<br>
 Create Django RestAPI endpoints for Data - Patrick
+<br>
 Create Queries in SQL - Andy and Patrick
+<br>
 Data Visualization Mockup Components for Data-Explore page - Vincent, Skylar
+<br>
 Connecting Data Visualization Components with backend API - Vincent, Skylar
