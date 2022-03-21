@@ -50,3 +50,15 @@ Run the production compile script
 ```bash
 npm run dev
 ```
+###Install CX_Oracle
+Run the pip install or just install all modules from above command
+```commandline
+pip install cx_Oracle
+```
+Go to this link and install proper Oracle Client version
+https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html
+
+Then set up the path variable to where all the DLL files are in your environment variables, be sure to unzip the file!
+
+###IMPORTANT:
+Please be sure to remove the username and password from settings.py after completion of the project!

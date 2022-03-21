@@ -1,6 +1,8 @@
 from django.urls import path, include
-from .views import GunView
+from .views import *
 
 urlpatterns = [
-    path('', GunView.as_view()),
+    path('', GunCreateView.as_view()),
+    path('list/', GunListView.as_view()),
+    path('delete/<int:pk>/', GunDeleteView.as_view()),
 ]
