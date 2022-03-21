@@ -33,6 +33,7 @@ First cd into the ```frontend``` folder.
 ```bash
 cd frontend
 ```
+
 Next install all dependicies.
 ```bash
 npm i webpack webpack-cli --save-dev
@@ -50,3 +51,11 @@ Run the production compile script
 ```bash
 npm run dev
 ```
+
+### To-Do
+Create models, Connecting Oracle Database - Andy
+Clean Data from excel then bulk load CSVs into Oracle - Andy and Patrick
+Create Django RestAPI endpoints for Data - Patrick
+Create Queries in SQL - Andy and Patrick
+Data Visualization Mockup Components for Data-Explore page - Vincent, Skylar
+Connecting Data Visualization Components with backend API - Vincent, Skylar
