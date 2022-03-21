@@ -33,6 +33,7 @@ First cd into the ```frontend``` folder.
 ```bash
 cd frontend
 ```
+
 Next install all dependicies.
 ```bash
 npm i webpack webpack-cli --save-dev
@@ -62,3 +63,16 @@ Then set up the path variable to where all the DLL files are in your environment
 
 ###IMPORTANT:
 Please be sure to remove the username and password from settings.py after completion of the project!
+=======
+
+### To-Do
+
+Clean Data from excel then bulk load CSVs into Oracle - Andy and Patrick
+<br>
+Create Django RestAPI endpoints for Data - Patrick
+<br>
+Create Queries in SQL - Andy and Patrick
+<br>
+Data Visualization Mockup Components for Data-Explore page - Vincent, Skylar
+<br>
+Connecting Data Visualization Components with backend API - Vincent, Skylar
