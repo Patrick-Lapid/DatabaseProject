@@ -7,6 +7,14 @@ from .serializers import GunSerializer
 # Create your views here.
 
 
-class GunView(generics.CreateAPIView):
+class GunCreateView(generics.CreateAPIView):
+    queryset = Gun.objects.all()
+    serializer_class = GunSerializer
+
+class GunDeleteView(generics.DestroyAPIView):
+    queryset = Gun.objects.all()
+    serializer_class = GunSerializer
+
+class GunListView(generics.ListAPIView):
     queryset = Gun.objects.all()
     serializer_class = GunSerializer
