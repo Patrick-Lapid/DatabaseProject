@@ -71,7 +71,9 @@ Please be sure to remove the username and password from settings.py after comple
 
 ### To-Do
 
-Clean Data from excel then bulk load CSVs into Oracle - Andy and Patrick
+Clean person data, split the status of the participant more
+columns (arrested, injuried, killed, etc) with boolean values, delete that extra id column- Patrick
+
 <br>
 Create Django RestAPI endpoints for Data - Patrick
 <br>
