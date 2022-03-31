@@ -9,7 +9,6 @@ Create external python virtual environment then run this command
 pip install -r requirements.txt
 ```
 ### Start Web Server
-
 To start the web server you need to run the following sequence of commands.
 
 First cd into DatabaseProject.
