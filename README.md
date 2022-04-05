@@ -60,14 +60,16 @@ Go to this link and install proper Oracle Client version
 https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html
 
 Then set up the path variable to where all the DLL files are in your environment variables, be sure to unzip the file!
+In system Path environmental variables, add file path
+<br>
+![Screenshot 2022-03-21 172607](https://user-images.githubusercontent.com/53315150/159366659-d0b5af3b-2286-42e9-8703-34daa0315629.png)
+![Screenshot 2022-03-21 172632](https://user-images.githubusercontent.com/53315150/159366668-33d480dd-d514-4fa4-80f4-1c39a7d4ed7e.png)
 
 ###IMPORTANT:
 Please be sure to remove the username and password from settings.py after completion of the project!
 =======
 
 ### To-Do
-
-Clean Data from excel then bulk load CSVs into Oracle - Andy and Patrick
 <br>
 Create Django RestAPI endpoints for Data - Patrick
 <br>
