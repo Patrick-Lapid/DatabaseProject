@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {OutcomeStatusSection} from '../components/OutcomeStatusSection';
 
 function DataExplorationPage() {
     return(
@@ -7,7 +8,7 @@ function DataExplorationPage() {
             <section className="landing-main">
                 <h1>Data Exploration Page</h1>
             </section>
-        
+            <OutcomeStatusSection/>
         </>
     )
 }
