@@ -70,10 +70,6 @@ Please be sure to remove the username and password from settings.py after comple
 =======
 
 ### To-Do
-
-Clean person data, split the status of the participant more
-columns (arrested, injuried, killed, etc) with boolean values, delete that extra id column- Patrick
-
 <br>
 Create Django RestAPI endpoints for Data - Patrick
 <br>
