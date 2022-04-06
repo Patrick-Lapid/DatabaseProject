@@ -1,24 +1,21 @@
-import http
-from django.shortcuts import render
 from rest_framework import generics
-from .models import Gun, Crime
-from .serializers import GunSerializer, CrimeSerializer
+from .models import *
+from .serializers import *
 
 # Create your views here.
 
-
-class GunCreateView(generics.CreateAPIView):
-    queryset = Gun.objects.all()
+class GunListView(generics.ListAPIView):
+    queryset = Gun.objects.raw('SELECT * FROM api_gun FETCH NEXT 5 ROWS ONLY')
     serializer_class = GunSerializer
 
-class CrimeCreateView(generics.CreateAPIView):
+class CrimeListView(generics.ListAPIView):
     queryset = Crime.objects.all()
     serializer_class = CrimeSerializer
 
-class GunDeleteView(generics.DestroyAPIView):
-    queryset = Gun.objects.all()
-    serializer_class = GunSerializer
+class PersonListView(generics.ListAPIView):
+    queryset = person.objects.all()
+    serializer_class = PersonSerializer
 
-class GunListView(generics.ListAPIView):
-    queryset = Gun.objects.all()
-    serializer_class = GunSerializer
+class StateListView(generics.ListAPIView):
+    queryset = State.objects.all()
+    serializer_class = StateSerializer

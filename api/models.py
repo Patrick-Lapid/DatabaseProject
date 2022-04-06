@@ -30,7 +30,6 @@ class State(models.Model):
     year2018 = models.PositiveIntegerField()
 
 class person(models.Model):
-
     GENDER_CHOICES = [('Male', 'Male'), ('Female', 'Female'), ('Unknown', 'Unknown')]
     TYPE_CHOICES = [('Subject-Suspect', 'Subject-Suspect'), ('Victim', 'Victim'), ('Unknown', 'Unknown')]
 
