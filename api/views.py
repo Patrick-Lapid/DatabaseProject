@@ -17,31 +17,94 @@ from django.db import connection
 @csrf_exempt
 def query1(request, num1, num2, num3, num4, num5, num6, year1=2013, month1=1, year2=2018, month2=12):
     if request.method == 'GET':
-
+        #Gets the 4 statuses of people in 3 age ranges from a specified year
         arr = [num1, num2, num3, num4, num5, num6]
         people = []
         cursor = connection.cursor()
         for x in range(3):
-            q = "SELECT count(case iskilled WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x*2], arr[x*2 + 1], year1, month1, year2, month2)
-            cursor.execute(q)
-            r = cursor.fetchone()
-            killed = r[0]
-            q = "SELECT count(case isarrested WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x * 2], arr[x * 2 + 1], year1, month1, year2, month2)
-            cursor.execute(q)
-            r = cursor.fetchone()
-            arrested = r[0]
-            q = "SELECT count(case isinjured WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x * 2], arr[x * 2 + 1], year1, month1, year2, month2)
-            cursor.execute(q)
-            r = cursor.fetchone()
-            injured = r[0]
-            q = "SELECT count(case isunharmed WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x * 2], arr[x * 2 + 1], year1, month1, year2, month2)
-            cursor.execute(q)
-            r = cursor.fetchone()
-            unharmed = r[0]
-            person = Query1(arr[x * 2], arr[x * 2 + 1], killed, injured, unharmed, arrested)
-            people.append(person)
 
+            #Check that there's count first, return zero in that case
+            q="SELECT count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x*2], arr[x*2 + 1], year1, month1, year2, month2)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            if (r[0] != 0):
+                q = "SELECT count(case iskilled WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x*2], arr[x*2 + 1], year1, month1, year2, month2)
+                cursor.execute(q)
+                r = cursor.fetchone()
+                killed = r[0]
+                q = "SELECT count(case isarrested WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x * 2], arr[x * 2 + 1], year1, month1, year2, month2)
+                cursor.execute(q)
+                r = cursor.fetchone()
+                arrested = r[0]
+                q = "SELECT count(case isinjured WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x * 2], arr[x * 2 + 1], year1, month1, year2, month2)
+                cursor.execute(q)
+                r = cursor.fetchone()
+                injured = r[0]
+                q = "SELECT count(case isunharmed WHEN 1 then 1 else null end)/count(*) FROM API_PERSON, API_CRIME WHERE AGE > {} AND AGE != 0 AND AGE < {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(arr[x * 2], arr[x * 2 + 1], year1, month1, year2, month2)
+                cursor.execute(q)
+                r = cursor.fetchone()
+                unharmed = r[0]
+                person = Query1(arr[x * 2], arr[x * 2 + 1], killed, injured, unharmed, arrested)
+            else:
+                person = Query1(arr[x * 2], arr[x * 2 + 1], 0, 0, 0, 0)
+            people.append(person)
+            print(connection.queries)
         serializer = Query1Serializer(people, many=True)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@csrf_exempt
+def query2(request, year1, year2, gender):
+    #Returns gender ratios of victim for a specified shooter gender for each year
+    #In context return total ratio for the entire time frame
+
+    if (request.method=='GET'):
+        #The dict to contain the data from the db, keys = year, value = male, female, unknown, total victims
+        victims = {}
+        cursor = connection.cursor()
+        g = gender.lower().capitalize()
+        print(g)
+
+        #get the total victims, male, female for each year
+        for x in range(year1, year2 + 1):
+            info = []
+            q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Male';".format(
+                g, x, x)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            info.append(r[0])
+            q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Female';".format(g, x, x)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            info.append(r[0])
+            q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim';".format(
+                g, x, x)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            info.append(r[0] - (info[0] + info[1]))
+            info.append(r[0])
+            victims[x] = info
+
+        data = []
+        #for each dictionary entry, initialize a query3 object and push it to a list to be serialized
+        for x in range(year1, year2 + 1):
+            obj = Query3(g, x, victims[x][0]/victims[x][3], victims[x][1]/victims[x][3], victims[x][2]/victims[x][3])
+            data.append(obj)
+
+        totalVic = 0
+        totalFemale = 0
+        totalMale = 0
+        totalUnknown = 0
+        for x in range(year1, year2 + 1):
+            totalVic += victims[x][3]
+            totalMale += victims[x][0]
+            totalFemale += victims[x][1]
+            totalUnknown += victims[x][2]
+
+        obj = Query3(g, year2, totalMale/totalVic, totalFemale/totalVic, totalUnknown/totalVic)
+        data.append(obj)
+        serializer = Query3Serializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 

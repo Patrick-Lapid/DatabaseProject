@@ -20,14 +20,12 @@ class Query2:
 
 
 class Query3:
-    def __init__(self, str1, str2, year1=2013, month1=1, year2=2018, month2=12):
-        self.str1 = str1
-        self.str2 = str2
-        self.year1 = year1
-        self.month1 = month1
-        self.year2 = year2
-        self.month2 = month2
-
+    def __init__(self, shooterGender, year, r1, r2, r3):
+        self.shooterGender = shooterGender
+        self.year = year
+        self.maleVictimsRatio = r1
+        self.femaleVictimsRatio = r2
+        self.unknownVictimsRatio = r3
 
 class Query4:
     def __init__(self, states, year1=2013, month1=1, year2=2018, month2=12):

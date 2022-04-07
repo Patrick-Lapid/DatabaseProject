@@ -10,19 +10,22 @@ class Query1Serializer(serializers.Serializer):
    arrested = serializers.FloatField()
 
 
-class Query2Serializer(serializers.Serializer):
-   year1 = serializers.IntegerField(required=False)
-   month1 = serializers.IntegerField(required=False)
-   year2 = serializers.IntegerField(required=False)
-   month2 = serializers.IntegerField(required=False)
-
 class Query3Serializer(serializers.Serializer):
-   str1 = serializers.CharField()
-   str2 = serializers.CharField()
-   year1 = serializers.IntegerField(required=False)
-   month1 = serializers.IntegerField(required=False)
-   year2 = serializers.IntegerField(required=False)
-   month2 = serializers.IntegerField(required=False)
+   shooterGender = serializers.CharField()
+   maleVictimsRatio = serializers.FloatField()
+   femaleVictimsRatio = serializers.FloatField()
+   unknownVictimsRatio = serializers.FloatField()
+   year = serializers.IntegerField()
+
+
+
+# class Query2Serializer(serializers.Serializer):
+#    str1 = serializers.CharField()
+#    str2 = serializers.CharField()
+#    year1 = serializers.IntegerField(required=False)
+#    month1 = serializers.IntegerField(required=False)
+#    year2 = serializers.IntegerField(required=False)
+#    month2 = serializers.IntegerField(required=False)
 
 class Query4Serializer(serializers.Serializer):
    states = serializers.ListField(min_length = 1)
