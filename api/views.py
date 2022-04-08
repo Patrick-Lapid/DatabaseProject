@@ -110,10 +110,10 @@ def query3(request, year1, year2, gender):
 
 @api_view(['GET'])
 @csrf_exempt
-def query6(request, num1, num2, month1, year1, month2, year2):
+def query6(request, num1, num2, ptype, month1, year1, month2, year2):
     if (request.method == 'GET'):
         cursor = connection.cursor()
-        q = "SELECT count(*) FROM API_PERSON, API_CRIME WHERE AGE >= {} AND AGE != 0 AND AGE <= {} AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(num1, num2, year1, month1, year2, month2)
+        q = "SELECT count(*) FROM API_PERSON, API_CRIME WHERE AGE >= {} AND AGE != 0 AND AGE <= {} AND PERSONTYPE='{}' AND api_person.incrime_id=api_crime.crimeID AND crimedate > date '{}-{}-1' AND crimedate < date '{}-{}-28';".format(num1, num2, ptype, year1, month1, year2, month2)
         cursor.execute(q)
         r = cursor.fetchone()
         print(r[0])
@@ -121,6 +121,7 @@ def query6(request, num1, num2, month1, year1, month2, year2):
         serializer = Query6Serializer(q6)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
 # class GunListView(generics.ListAPIView):
 #     queryset = Gun.objects.raw('SELECT * FROM api_gun FETCH NEXT 5 ROWS ONLY')
 #     serializer_class = GunSerializer
