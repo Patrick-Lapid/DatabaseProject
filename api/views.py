@@ -55,6 +55,27 @@ def query1(request, num1, num2, num3, num4, num5, num6, year1=2013, month1=1, ye
 
 @api_view(['GET'])
 @csrf_exempt
+def query2(request, year1):
+
+    if(request.method == 'GET'):
+        cursor = connection.cursor()
+        if (year1 == 2014):
+            q = "SELECT API_STATE.STATENAME, COUNT(CRIMEID), API_STATE.YEAR2014 FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME WHERE API_CRIME.CRIMEDATE BETWEEN Date '2013-1-1' AND Date '2014-12-28' GROUP BY API_STATE.STATENAME, API_STATE.YEAR2014;"
+        else:
+            q = "SELECT API_STATE.STATENAME, COUNT(CRIMEID), API_STATE.YEAR{} FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME WHERE API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-28' GROUP BY API_STATE.STATENAME, API_STATE.YEAR{};".format(year1, year1, year1, year1)
+        cursor.execute(q)
+        r = cursor.fetchall()
+        states = []
+        for entry in r:
+            obj = Query2(entry[0], entry[1], entry[2])
+            states.append(obj)
+
+        serializer = Query2Serializer(states, many=True)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@csrf_exempt
 def query3(request, year1, year2, gender):
     #Returns gender ratios of victim for a specified shooter gender for each year
     #In context return total ratio for the entire time frame

@@ -12,11 +12,10 @@ class Query1:
         self.arrested = arrested
 
 class Query2:
-    def __init__(self, year1=2013, month1=1, year2=2018, month2=12):
-        self.year1 = year1
-        self.month1 = month1
-        self.year2 = year2
-        self.month2 = month2
+    def __init__(self, state, medianIncome, numIncidents):
+        self.state = state
+        self.numIncidents = numIncidents
+        self.medianIncome = medianIncome
 
 class Query3:
     def __init__(self, shooterGender, year, r1, r2, r3):

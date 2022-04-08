@@ -9,6 +9,10 @@ class Query1Serializer(serializers.Serializer):
    unharmed = serializers.FloatField()
    arrested = serializers.FloatField()
 
+class Query2Serializer(serializers.Serializer):
+   state = serializers.CharField()
+   numIncidents = serializers.IntegerField()
+   medianIncome = serializers.IntegerField()
 
 class Query3Serializer(serializers.Serializer):
    shooterGender = serializers.CharField()
@@ -21,14 +25,6 @@ class Query6Serializer(serializers.Serializer):
    age1 = serializers.IntegerField()
    age2 = serializers.IntegerField()
    count = serializers.IntegerField()
-
-# class Query2Serializer(serializers.Serializer):
-#    str1 = serializers.CharField()
-#    str2 = serializers.CharField()
-#    year1 = serializers.IntegerField(required=False)
-#    month1 = serializers.IntegerField(required=False)
-#    year2 = serializers.IntegerField(required=False)
-#    month2 = serializers.IntegerField(required=False)
 
 class Query4Serializer(serializers.Serializer):
    states = serializers.ListField(min_length = 1)
