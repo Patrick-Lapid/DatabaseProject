@@ -131,6 +131,40 @@ def query3(request, year1, year2, gender):
 
 @api_view(['GET'])
 @csrf_exempt
+def query5(request, year1, year2):
+    if (request.method == 'GET'):
+        cursor = connection.cursor()
+        q = '''
+        WITH totalCrimes(total) AS (
+        SELECT COUNT(API_CRIME.CRIMEID) AS total
+        FROM API_CRIME JOIN API_STATE
+        ON API_CRIME.STATE_ID = API_STATE.STATENAME
+        WHERE API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31'
+        ),
+        stateCrimes(states, count) AS (
+            SELECT API_STATE.STATENAME AS states, COUNT(API_CRIME.CRIMEID)
+            FROM API_CRIME JOIN API_STATE
+            ON API_CRIME.STATE_ID = API_STATE.STATENAME
+            WHERE API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31'
+            GROUP BY API_STATE.STATENAME
+        )
+        SELECT API_STATE.statename, coalesce(stateCrimes.count * 1000/ totalCrimes.total, 0)
+        FROM totalCrimes, stateCrimes
+        RIGHT JOIN api_state ON api_state.statename = states
+        '''.format(year1, year2, year1, year2)
+        cursor.execute(q)
+        r = cursor.fetchall()
+        states = []
+        for x in r:
+            obj = Query5(x[0], x[1])
+            print(obj.state)
+            states.append(obj)
+        serializer = Query5Serializer(states, many=True)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@csrf_exempt
 def query6(request, num1, num2, ptype, month1, year1, month2, year2):
     if (request.method == 'GET'):
         cursor = connection.cursor()

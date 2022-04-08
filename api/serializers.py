@@ -21,23 +21,18 @@ class Query3Serializer(serializers.Serializer):
    unknownVictimsRatio = serializers.FloatField()
    year = serializers.IntegerField()
 
+class Query4Serializer(serializers.Serializer):
+   state = serializers.CharField()
+   percentage = serializers.FloatField()
+
+class Query5Serializer(serializers.Serializer):
+   state = serializers.CharField()
+   percentage = serializers.FloatField()
+
 class Query6Serializer(serializers.Serializer):
    age1 = serializers.IntegerField()
    age2 = serializers.IntegerField()
    count = serializers.IntegerField()
-
-class Query4Serializer(serializers.Serializer):
-   states = serializers.ListField(min_length = 1)
-   year1 = serializers.IntegerField(required=False)
-   month1 = serializers.IntegerField(required=False)
-   year2 = serializers.IntegerField(required=False)
-   month2 = serializers.IntegerField(required=False)
-
-class Query5Serializer(serializers.Serializer):
-   year1 = serializers.IntegerField(required=False)
-   month1 = serializers.IntegerField(required=False)
-   year2 = serializers.IntegerField(required=False)
-   month2 = serializers.IntegerField(required=False)
 
 # class GunSerializer(serializers.ModelSerializer):
 #     class Meta:

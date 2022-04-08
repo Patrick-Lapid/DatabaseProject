@@ -26,19 +26,14 @@ class Query3:
         self.unknownVictimsRatio = r3
 
 class Query4:
-    def __init__(self, states, year1=2013, month1=1, year2=2018, month2=12):
-        self.year1 = year1
-        self.month1 = month1
-        self.year2 = year2
-        self.month2 = month2
-        self.states = states
+    def __init__(self, state, percentage):
+        self.state = state
+        self.percentage = percentage
 
 class Query5:
-    def __init__(self,year1=2013, month1=1, year2=2018, month2=12):
-        self.year1 = year1
-        self.month1 = month1
-        self.year2 = year2
-        self.month2 = month2
+    def __init__(self, state, percentage):
+        self.state = state
+        self.percentage = percentage
 
 class Query6:
     def __init__(self,age1, age2, count):
