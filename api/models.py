@@ -18,7 +18,6 @@ class Query2:
         self.year2 = year2
         self.month2 = month2
 
-
 class Query3:
     def __init__(self, shooterGender, year, r1, r2, r3):
         self.shooterGender = shooterGender
@@ -42,6 +41,11 @@ class Query5:
         self.year2 = year2
         self.month2 = month2
 
+class Query6:
+    def __init__(self,age1, age2, count):
+        self.age1 = age1
+        self.age2 = age2
+        self.count = count
 
 class Gun(models.Model):
     STOLEN_CHOICES = [('Unknown','Unknown'), ('Notstolen','Not-Stolen'), ('Stolen','Stolen')]

@@ -17,7 +17,10 @@ class Query3Serializer(serializers.Serializer):
    unknownVictimsRatio = serializers.FloatField()
    year = serializers.IntegerField()
 
-
+class Query6Serializer(serializers.Serializer):
+   age1 = serializers.IntegerField()
+   age2 = serializers.IntegerField()
+   count = serializers.IntegerField()
 
 # class Query2Serializer(serializers.Serializer):
 #    str1 = serializers.CharField()
