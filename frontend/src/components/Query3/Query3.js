@@ -165,17 +165,15 @@ function Query3() {
   return (
     <div>
       <div className="main-container">
-        <div className='chart-container-center'>
+        <div className='chart-container-1'>
           <h1>Percent of Female Victims vs Male Victims</h1>
           <PieChart1 chartData={pieOne} />
         </div>
-      </div>
-      <div className="main-container">
-        <div className='chart-container-1'>
+        <div className='chart-container-2'>
           <h1>Percent of Victims (by gender) Shot by Males</h1>
           <PieChart1 chartData={pieTwo} />
         </div>
-        <div className='chart-container-2'>
+        <div className='chart-container-3'>
           <h1>Percent of Victims (by gender) Shot by Females</h1>
           <PieChart1 chartData={pieThree} />
         </div>

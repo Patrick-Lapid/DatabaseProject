@@ -10,12 +10,15 @@ function DataExplorationPage() {
   return (
     <div className="App">
       <h1>Query 1</h1>
+      <p>Skylar put descriptions here</p>
       <div><Query1 /></div>
       
       <h1>Query 2, 4, and 5</h1>
+      <p>Skylar put descriptions here</p>
       <div><Query2 /></div>
 
       <h1>Query 3</h1>
+      <p>Skylar put descriptions here</p>
       <div><Query3 /></div>
     </div>  
   );
