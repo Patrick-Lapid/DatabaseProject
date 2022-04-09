@@ -23,7 +23,10 @@ class Query3Serializer(serializers.Serializer):
 
 class Query4Serializer(serializers.Serializer):
    state = serializers.CharField()
-   percentage = serializers.FloatField()
+   stolen = serializers.FloatField()
+   notstolen = serializers.FloatField()
+   unknown = serializers.FloatField()
+   year = serializers.IntegerField()
 
 class Query5Serializer(serializers.Serializer):
    state = serializers.CharField()
