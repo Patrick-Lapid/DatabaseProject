@@ -26,9 +26,12 @@ class Query3:
         self.unknownVictimsRatio = r3
 
 class Query4:
-    def __init__(self, state, percentage):
+    def __init__(self, state, stolen, notstolen, unknown, year):
         self.state = state
-        self.percentage = percentage
+        self.stolen = stolen
+        self.notstolen = notstolen
+        self.unknown = unknown
+        self.year = year
 
 class Query5:
     def __init__(self, state, percentage):

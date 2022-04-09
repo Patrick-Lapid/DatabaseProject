@@ -131,6 +131,65 @@ def query3(request, year1, year2, gender):
 
 @api_view(['GET'])
 @csrf_exempt
+def query4(request, state):
+    if (request.method == 'GET'):
+        victims = {}
+        cursor = connection.cursor()
+        for x in range(2013, 2019):
+            victims[x] = []
+            if (state != 'USA'):
+                q = "SELECT COUNT(API_GUN.GUNID) AS total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' AND statename='{}' GROUP BY API_STATE.STATENAME;".format(x, x, 'Florida')
+            else:
+                q = "SELECT COUNT(API_GUN.GUNID) AS total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x,x)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            if (r is None):
+                victims[x].append(0)
+            else:
+                victims[x].append(r[0])
+            if (state != 'USA'):
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Stolen' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format('Florida', x, x)
+            else:
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Stolen' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x,x)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            if (r is None):
+                victims[x].append(0)
+            else:
+                victims[x].append(r[0])
+            if (state != 'USA'):
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Notstolen' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format('Florida', x, x)
+            else:
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Notstolen' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x, x)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            if (r is None):
+                victims[x].append(0)
+            else:
+                victims[x].append(r[0])
+            if (state != 'USA'):
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Unknown' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format('Florida', x, x)
+            else:
+                q = q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Unknown' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x,x)
+            cursor.execute(q)
+            r = cursor.fetchone()
+            if (r is None):
+                victims[x].append(0)
+            else:
+                victims[x].append(r[0])
+            print(victims)
+
+        objList = []
+        for x in range(2013, 2019):
+            count = victims[x][0]
+            q4 = Query4(state, victims[x][1]/count, victims[x][2]/count, victims[x][3]/count, x)
+            objList.append(q4)
+        serializer = Query4Serializer(objList, many=True)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@csrf_exempt
 def query5(request, year1, year2):
     if (request.method == 'GET'):
         cursor = connection.cursor()
@@ -153,6 +212,7 @@ def query5(request, year1, year2):
         RIGHT JOIN api_state ON api_state.statename = states
         '''.format(year1, year2, year1, year2)
         cursor.execute(q)
+        print(connection.queries)
         r = cursor.fetchall()
         states = []
         for x in r:
