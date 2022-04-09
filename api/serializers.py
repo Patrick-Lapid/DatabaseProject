@@ -19,7 +19,7 @@ class Query3Serializer(serializers.Serializer):
    maleVictimsRatio = serializers.FloatField()
    femaleVictimsRatio = serializers.FloatField()
    unknownVictimsRatio = serializers.FloatField()
-   year = serializers.IntegerField()
+
 
 class Query4Serializer(serializers.Serializer):
    state = serializers.CharField()

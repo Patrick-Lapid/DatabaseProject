@@ -48,9 +48,7 @@ function Query2() {
         scatterPoints.push({
           label: state,
           data:[{ "x": numIncidents, "y": medianIncome}],
-          backgroundColor: [
-            "#000080",
-          ],
+          backgroundColor: ["#000080"],
           borderColor: "black",
           borderWidth: 0.5,
         })
@@ -108,6 +106,7 @@ function Query2() {
                   <option value="2018">2018</option>
                 </select>
             </div>
+
             <div className="chart-container-5">
               <h2>Gun Violence by State</h2>
               <img src={src}></img>
@@ -119,6 +118,7 @@ function Query2() {
                   <option value="2018">2018</option>
                 </select>
             </div>
+
       </div>
     )
 }
