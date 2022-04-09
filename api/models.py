@@ -20,7 +20,6 @@ class Query2:
 class Query3:
     def __init__(self, shooterGender, year, r1, r2, r3):
         self.shooterGender = shooterGender
-        self.year = year
         self.maleVictimsRatio = r1
         self.femaleVictimsRatio = r2
         self.unknownVictimsRatio = r3

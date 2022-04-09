@@ -90,28 +90,40 @@ def query3(request, year1, year2, gender):
         #get the total victims, male, female for each year
         for x in range(year1, year2 + 1):
             info = []
-            q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Male';".format(
-                g, x, x)
+            if (gender == "All"):
+                q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Male';".format(
+                    x, x)
+            else:
+                q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Male';".format(
+                    g, x, x)
             cursor.execute(q)
             r = cursor.fetchone()
             info.append(r[0])
-            q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Female';".format(g, x, x)
+            if (gender == "All"):
+                q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Female';".format(
+                    x, x)
+            else:
+                q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim' AND API_PERSON.GENDER = 'Female';".format(g, x, x)
             cursor.execute(q)
             r = cursor.fetchone()
             info.append(r[0])
-            q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim';".format(
-                g, x, x)
+            if (gender == "All"):
+                q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim';".format(
+                    x, x)
+            else:
+                q = "WITH maleIncidents(crimes) AS (SELECT UNIQUE API_CRIME.CRIMEID AS crimes FROM API_CRIME JOIN API_PERSON ON API_CRIME.CRIMEID = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Subject-Suspect' AND API_PERSON.GENDER = '{}' AND API_CRIME.CRIMEDATE BETWEEN Date '{}-1-1' AND Date '{}-12-31') SELECT COUNT(API_PERSON.PID) FROM maleIncidents JOIN API_PERSON ON maleIncidents.crimes = API_PERSON.INCRIME_ID WHERE API_PERSON.PERSONTYPE = 'Victim';".format(
+                    g, x, x)
             cursor.execute(q)
             r = cursor.fetchone()
             info.append(r[0] - (info[0] + info[1]))
             info.append(r[0])
             victims[x] = info
 
-        data = []
-        #for each dictionary entry, initialize a query3 object and push it to a list to be serialized
-        for x in range(year1, year2 + 1):
-            obj = Query3(g, x, victims[x][0]/victims[x][3], victims[x][1]/victims[x][3], victims[x][2]/victims[x][3])
-            data.append(obj)
+        # data = []
+        # #for each dictionary entry, initialize a query3 object and push it to a list to be serialized
+        # for x in range(year1, year2 + 1):
+        #     obj = Query3(g, x, victims[x][0]/victims[x][3], victims[x][1]/victims[x][3], victims[x][2]/victims[x][3])
+        #     data.append(obj)
 
         totalVic = 0
         totalFemale = 0
@@ -124,8 +136,7 @@ def query3(request, year1, year2, gender):
             totalUnknown += victims[x][2]
 
         obj = Query3(g, year2, totalMale/totalVic, totalFemale/totalVic, totalUnknown/totalVic)
-        data.append(obj)
-        serializer = Query3Serializer(data, many=True)
+        serializer = Query3Serializer(obj)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
