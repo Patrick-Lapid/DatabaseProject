@@ -42,7 +42,7 @@ function Query2() {
           label: state,
           data:[{ "x": numIncidents, "y": medianIncome}],
           backgroundColor: [
-            "#ff1493",
+            "#9E2A2A",
           ],
           borderColor: "black",
           borderWidth: 0.5,
@@ -89,6 +89,9 @@ function Query2() {
                   <option value="2017">2017</option>
                   <option value="2018">2018</option>
                 </select>
+            </div>
+            <div className='chart-container-5'>
+              <h2>Put map info in this div</h2>
             </div>
             
       </div>
