@@ -107,7 +107,7 @@ function Query2() {
                 </select>
             </div>
 
-            <div className="chart-container-5">
+            <div className='chart-container-5'>
               <h2>Gun Violence by State</h2>
               <img src={src}></img>
               <select onChange={handleMapSelect}>
