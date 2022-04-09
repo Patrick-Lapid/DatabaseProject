@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import BubbleChart from "./ScatterChart1";
-
+import Map2014 from './maps/query5-2014.png';
+import Map2015 from './maps/query5-2015.png';
+import Map2016 from './maps/query5-2016.png';
+import Map2017 from './maps/query5-2017.png';
+import Map2018 from './maps/query5-2018.png';
 import { QueryTwoScatter } from "../../Data";
 
 
 function Query2() {
     const [stateData, setStateData] = useState([]);
     const [year, setYear] = useState(2018);
+    const [map, setMap] = useState(2014);
+    const [isLoading, setIsLoading] = useState(false);
+    const [src, setSrc] = useState(Map2014);
 
     const [options, setOptions] = useState({
       plugins: {
@@ -23,7 +30,7 @@ function Query2() {
             // Income = x, Incidents = y,
             data: [],
             backgroundColor: [
-              "#335C67",
+              "#000080",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -42,7 +49,7 @@ function Query2() {
           label: state,
           data:[{ "x": numIncidents, "y": medianIncome}],
           backgroundColor: [
-            "#ff1493",
+            "#000080",
           ],
           borderColor: "black",
           borderWidth: 0.5,
@@ -55,6 +62,12 @@ function Query2() {
         
       })
     },[stateData])
+
+    useEffect(() => {
+      setIsLoading(true);
+      
+      setIsLoading(false);
+    }, [map])    
 
     // API call based on year
     useEffect(() => {
@@ -76,13 +89,18 @@ function Query2() {
       setYear(event.target.value);
     }
 
+
+
+    const handleMapSelect = (event) => {
+      setMap(event.target.value);
+    }
+
     return (
         <div className="main-container">
             <div className="chart-container-4">
                 <h2>Incidents vs Income per Capita</h2>
-                <BubbleChart chartData={Bubble} options = {options} />
+                <BubbleChart chartData={Bubble} />
                 <select onChange={handleYearSelect}>
-                  <option disabled>From</option>
                   <option value="2014">2014</option>
                   <option value="2015">2015</option>
                   <option value="2016">2016</option>
@@ -90,7 +108,17 @@ function Query2() {
                   <option value="2018">2018</option>
                 </select>
             </div>
-            
+            <div className="chart-container-5">
+              <h2>Gun Violence by State</h2>
+              <img src={src}></img>
+              <select onChange={handleMapSelect}>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                </select>
+            </div>
       </div>
     )
 }
