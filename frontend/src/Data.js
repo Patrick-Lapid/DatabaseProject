@@ -56,21 +56,21 @@ export const QueryOneBar = [
     {
       id: 1,
       age: '0-14 years old',
-      value: 12
+      value: 0.5
     },
     {
       id: 2,
       age: '15-25 years old',
-      value: 37,
+      value: 0.2,
     },
     {
       id: 3,
       age: '26-64 years old',
-      value: 94,
+      value: 0.1,
     },
     {
       id: 4,
       age: '65+ years old',
-      value: 18,
+      value: 0.3,
     },
   ];

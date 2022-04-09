@@ -22,7 +22,7 @@ body {
 
 /* NAVBAR STYLING */
 
-.navbar-container {
+.navigationbar-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -30,7 +30,7 @@ body {
   background-color: #1F373E;
 }
 
-.navbar-logo {
+.navigationbar-logo {
   color: white;
   text-transform: uppercase;
   letter-spacing: 5px;
@@ -39,18 +39,18 @@ body {
   font-size: 22px;
 }
 
-.nav-menu {
+.navigation-menu {
   color: white;
   display: flex;
   justify-content: space-around;
   width: 15%;
 }
 
-.nav-menu li {
+.navigation-menu li {
   list-style: none;
 }
 
-.nav-item a {
+.navigation-item a {
   color: white;
   text-decoration: none;
   letter-spacing: 3px;

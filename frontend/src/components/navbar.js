@@ -4,24 +4,24 @@ import { Link } from 'react-router-dom'
 function Navbar() {
 
     return(
-        <nav className='navbar'>
-            <div className='navbar-container'>
+        <nav className='navigation-bar'>
+            <div className='navigationbar-container'>
 
                 {/* replace with app logo in future, remove route in future */}
-                <Link to='/' className='navbar-logo'>
+                <Link to='/' className='navigationbar-logo'>
                     Overview
                 </Link>
 
                 {/* Navbar Items */}
-                <ul className='nav-menu'>
+                <ul className='navigation-menu'>
                 
-                    <li className='nav-item'>
+                    <li className='navigation-item'>
                         <Link to='/data-exploration'>
                             Data Exploration
                         </Link>
                     </li>
                     
-                    <li className='nav-item'>
+                    <li className='navigation-item'>
                         <Link to='/resources'>
                             Resources
                         </Link>

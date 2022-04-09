@@ -1,9 +1,16 @@
 import React from "react";
-import { Scatter } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
+import { Bubble } from "react-chartjs-2";
 
-function ScatterChart({ chartData }) {
-  return <Scatter data={chartData} />;
+const options = {
+  plugins: {
+    legend: {
+      display: false
+    },
+  }
 }
 
-export default ScatterChart;
+function BubbleChart({ chartData }) {
+  return <Bubble data={chartData} options = {options}/>;
+}
+
+export default BubbleChart;

@@ -4,6 +4,7 @@ import DataExplorationPage from '../pages/data-exploration-page'
 import ResourcesPage from '../pages/resources-page'
 import Navbar from "./navbar";
 
+
 import {
     BrowserRouter as Router,
     Routes,
