@@ -24,16 +24,14 @@ module.exports = {
         loader: 'svg-inline-loader'
       },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpg|png|gif)$/,
         use: {
           loader: 'url-loader',
         },
       }, 
     ],
   },
-  resolve:{
-    extensions: [".js"]
-  },
+  
   optimization: {
     minimize: true,
   },

@@ -5,23 +5,15 @@ import Map2015 from './maps/query5-2015.png';
 import Map2016 from './maps/query5-2016.png';
 import Map2017 from './maps/query5-2017.png';
 import Map2018 from './maps/query5-2018.png';
-import { QueryTwoScatter } from "../../Data";
+import Spinner from './maps/Loading_icon.gif';
 
 
 function Query2() {
     const [stateData, setStateData] = useState([]);
-    const [year, setYear] = useState(2018);
+    const [year, setYear] = useState(2014);
     const [map, setMap] = useState(2014);
-    const [isLoading, setIsLoading] = useState(false);
-    const [src, setSrc] = useState(Map2014);
-
-    const [options, setOptions] = useState({
-      plugins: {
-        legend: {
-          display: false
-        }
-      }
-    });
+    const [isLoading, setIsLoading] = useState(true);
+    const [imgSrc, setSrc] = useState(Map2018);
 
     const [Bubble, setBubble] = useState({
         datasets: [
@@ -39,7 +31,7 @@ function Query2() {
     });
     
     useEffect(()=>{
-      console.log(stateData.map((data) => data.numIncidents))
+      
       let scatterPoints = []
       stateData.forEach( i=> {
         let numIncidents = parseInt(i.numIncidents)
@@ -62,9 +54,32 @@ function Query2() {
     },[stateData])
 
     useEffect(() => {
+      const delay = ms => new Promise(res => setTimeout(res, ms));
       setIsLoading(true);
+      console.log(map)
+      switch(map){
+        case "2014":
+          setSrc(Map2014);
+          break;
+        case "2015":
+          setSrc(Map2015);
+          break;
+        case "2016":
+          setSrc(Map2016);
+          break;
+        case "2017":
+          setSrc(Map2017);
+          break;
+        case "2017":
+          setSrc(Map2018);
+          break;  
+      }
       
-      setIsLoading(false);
+      const getMap = async () => {
+        await delay(700);
+        setIsLoading(false);
+      }
+      getMap();
     }, [map])    
 
     // API call based on year
@@ -76,7 +91,6 @@ function Query2() {
           .then(res => res.json())
           .then(json => {
             setStateData(json);
-            console.log(json)
         });
       }
       
@@ -86,8 +100,6 @@ function Query2() {
     const handleYearSelect = (event) => {
       setYear(event.target.value);
     }
-
-
 
     const handleMapSelect = (event) => {
       setMap(event.target.value);
@@ -108,9 +120,10 @@ function Query2() {
             </div>
 
             <div className='chart-container-5'>
-              <h2>Gun Violence by State</h2>
-              <img src={src}></img>
-              <select onChange={handleMapSelect}>
+                <h2>Gun Violence by State</h2>
+                {isLoading && <img src={Spinner}></img>}
+                {!isLoading && <img src={imgSrc} key={imgSrc}></img>}
+                <select onChange={handleMapSelect}>
                   <option value="2014">2014</option>
                   <option value="2015">2015</option>
                   <option value="2016">2016</option>
@@ -118,7 +131,7 @@ function Query2() {
                   <option value="2018">2018</option>
                 </select>
             </div>
-
+      
       </div>
     )
 }

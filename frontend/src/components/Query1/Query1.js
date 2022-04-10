@@ -168,12 +168,12 @@ function Query1() {
       
       const fetchData = async () => {
         try{
-          console.log(fromYearAge, ": ", toYearAge)
+          
           fetch(`http://127.0.0.1:8000/api/query1/0/14/15/25/26/100/1/${fromYearAge}/12/${toYearAge}/`)
             .then(res => res.json())
             .then(json => {
               setAgeData(json);
-              console.log(json)
+            
           })
 
         } catch(error) {
@@ -190,7 +190,6 @@ function Query1() {
       const delay = ms => new Promise(res => setTimeout(res, ms));
       const getData = async () => {
         
-        console.log(fromSusYearAge, ": ", toSusYearAge)
         let tempSusData = []
         let tempVicData = []
         // Fetch Suspect data with API call

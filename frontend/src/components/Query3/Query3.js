@@ -16,7 +16,7 @@ function Query3() {
     datasets: [
       {
         labels: "Amount",
-        data: QueryOneSuspect.map((data) => data.value),
+        data: [],
         backgroundColor: [
           "#9E2A2B",
           "#335C67",
@@ -34,7 +34,7 @@ function Query3() {
     datasets: [
       {
         label: "Amount",
-        data: QueryOneSuspect.map((data) => data.value),
+        data: [],
         backgroundColor: [
           "#9E2A2B",
           "#335C67",
@@ -52,7 +52,7 @@ function Query3() {
     datasets: [
       {
         label: "Amount",
-        data: QueryOneSuspect.map((data) => data.value),
+        data: [],
         backgroundColor: [
           "#9E2A2B",
           "#335C67",
@@ -69,11 +69,11 @@ function Query3() {
   useEffect(() => {
     console.log("CHART 1:", totalData)
     setPieOne({
-      labels: ['Female Victims', 'Male Victims'],
+      labels: ['Female Victims', 'Male Victims', 'Unknown'],
       datasets: [
         {
           labels: "Amount",
-          data: QueryOneSuspect.map((data) => data.value), // fix this
+          data: [totalData.femaleVictimsRatio, totalData.maleVictimsRatio, totalData.unknownVictimsRatio ], // fix this
           backgroundColor: [
             "#9E2A2B",
             "#335C67",
@@ -89,11 +89,11 @@ function Query3() {
   // Updates Chart 2 on API call
   useEffect(() => {
     setPieTwo({
-      labels: ['Female Victims', 'Male Victims'],
+      labels: ['Female Victims', 'Male Victims', 'Unknown'],
       datasets: [
         {
           label: "Amount",
-          data: QueryOneSuspect.map((data) => data.value), // Change this
+          data: [maleData.femaleVictimsRatio, maleData.maleVictimsRatio, maleData.unknownVictimsRatio ], // Change this
           backgroundColor: [
             "#9E2A2B",
             "#335C67",
@@ -110,11 +110,11 @@ function Query3() {
   // Updates Chart 3 on API call
   useEffect(() => {
     setPieThree({
-      labels: ['Female Victims', 'Male Victims'],
+      labels: ['Female Victims', 'Male Victims', 'Unknown'],
       datasets: [
         {
           label: "Amount",
-          data: QueryOneSuspect.map((data) => data.value), // change to femaleData.
+          data: [femaleData.femaleVictimsRatio, femaleData.maleVictimsRatio, femaleData.unknownVictimsRatio ], // change to femaleData.
           backgroundColor: [
             "#9E2A2B",
             "#335C67",
@@ -134,20 +134,23 @@ function Query3() {
     const getData = async () => {
       
       // Fetch Suspect data with API call
-      fetch(`http://127.0.0.1:8000/api/query3/${fromYear}/${toYear}/male/`)
+      fetch(`http://127.0.0.1:8000/api/query3/${fromYear}/${toYear}/Male/`)
         .then(res => res.json())
         .then(json => {
           setMaleData(json);
+          console.log(json.shooterGender)
       });
-      fetch(`http://127.0.0.1:8000/api/query3/${fromYear}/${toYear}/female/`)
+      fetch(`http://127.0.0.1:8000/api/query3/${fromYear}/${toYear}/Female/`)
         .then(res => res.json())
         .then(json => {
           setFemaleData(json);
+          console.log(json)
       });
-      fetch(`http://127.0.0.1:8000/api/query3/${fromYear}/${toYear}/female/`)
+      fetch(`http://127.0.0.1:8000/api/query3/${fromYear}/${toYear}/All/`)
         .then(res => res.json())
         .then(json => {
           setTotalData(json);   
+          console.log(json)
       });
     }
     
