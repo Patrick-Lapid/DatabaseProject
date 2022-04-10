@@ -149,7 +149,7 @@ def query4(request, state):
         for x in range(2013, 2019):
             victims[x] = []
             if (state != 'USA'):
-                q = "SELECT COUNT(API_GUN.GUNID) AS total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' AND statename='{}' GROUP BY API_STATE.STATENAME;".format(x, x, 'Florida')
+                q = "SELECT COUNT(API_GUN.GUNID) AS total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' AND statename='{}' GROUP BY API_STATE.STATENAME;".format(x, x, state)
             else:
                 q = "SELECT COUNT(API_GUN.GUNID) AS total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x,x)
             cursor.execute(q)
@@ -159,7 +159,7 @@ def query4(request, state):
             else:
                 victims[x].append(r[0])
             if (state != 'USA'):
-                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Stolen' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format('Florida', x, x)
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Stolen' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format(state, x, x)
             else:
                 q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Stolen' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x,x)
             cursor.execute(q)
@@ -169,7 +169,7 @@ def query4(request, state):
             else:
                 victims[x].append(r[0])
             if (state != 'USA'):
-                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Notstolen' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format('Florida', x, x)
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Notstolen' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format(state, x, x)
             else:
                 q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Notstolen' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x, x)
             cursor.execute(q)
@@ -179,16 +179,16 @@ def query4(request, state):
             else:
                 victims[x].append(r[0])
             if (state != 'USA'):
-                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Unknown' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format('Florida', x, x)
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total, API_STATE.STATENAME AS stateList FROM API_CRIME JOIN API_STATE ON API_CRIME.STATE_ID = API_STATE.STATENAME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Unknown' AND STATENAME = '{}' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31' GROUP BY API_STATE.STATENAME;".format(state, x, x)
             else:
-                q = q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Unknown' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x,x)
+                q = "SELECT COALESCE(COUNT(API_GUN.GUNID), 0) as total FROM API_CRIME JOIN API_GUN ON API_GUN.CRIME_ID = API_CRIME.CRIMEID WHERE API_GUN.STOLEN = 'Unknown' AND API_CRIME.CRIMEDATE BETWEEN DATE '{}-1-1' AND DATE '{}-12-31';".format(x,x)
             cursor.execute(q)
             r = cursor.fetchone()
             if (r is None):
                 victims[x].append(0)
             else:
                 victims[x].append(r[0])
-            print(victims)
+
 
         objList = []
         for x in range(2013, 2019):
