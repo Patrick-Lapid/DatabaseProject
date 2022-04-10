@@ -22,7 +22,7 @@ function Query2() {
             // Income = x, Incidents = y,
             data: [],
             backgroundColor: [
-              "#000080",
+              "#FF0000",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -40,8 +40,8 @@ function Query2() {
         scatterPoints.push({
           label: state,
           data:[{ "x": numIncidents, "y": medianIncome}],
-          backgroundColor: ["#000080"],
-          borderColor: "black",
+          backgroundColor: ["#FF0000"],
+          borderColor: "#FFC0CB",
           borderWidth: 0.5,
         })
         

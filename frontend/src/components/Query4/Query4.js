@@ -24,8 +24,10 @@ function Query4(){
         let stolenPoints = []
         let notStolenPoints = []
         stateData.forEach( i => {
-            let stolenData = parseInt(i.stolen);
-            let notStolenData = parseInt(i.notstolen);
+            let stolenData = parseFloat(i.stolen)*100;
+            let notStolenData = parseFloat(i.notstolen)*100;
+            console.log(i.state);
+            console.log(stolenData)
             stolenPoints.push(stolenData);
             notStolenPoints.push(notStolenData);
           });
@@ -37,7 +39,7 @@ function Query4(){
               {
                 label: "Stolen",
                 data: stolenPoints,
-                borderColor: "rgba(75,192,192,1)"
+                borderColor: "rgb(95, 158, 160)"
               },
               {
                 label: "Not Stolen",
@@ -75,7 +77,7 @@ function Query4(){
         
         <div className="main-container">
             <div className="chart-container-6">
-                <h1>{usState} Stolen Gun Statistics</h1>
+                <h1>{usState} Stolen Gun Statistics (Percentages)</h1>
                 <LineChart chartData={line} />
                 <select onChange={handleState} defaultValue = "USA">
                     <option value="USA">United States</option>
