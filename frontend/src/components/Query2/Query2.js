@@ -121,8 +121,10 @@ function Query2() {
 
             <div className='chart-container-5'>
                 <h2>Gun Violence by State</h2>
-                {isLoading && <img src={Spinner}></img>}
-                {!isLoading && <img src={imgSrc} key={imgSrc}></img>}
+                <div className='mapImage'> 
+                  {isLoading && <img src={Spinner}></img>}
+                  {!isLoading && <img src={imgSrc} key={imgSrc}></img>}
+                </div>
                 <select onChange={handleMapSelect}>
                   <option value="2014">2014</option>
                   <option value="2015">2015</option>
