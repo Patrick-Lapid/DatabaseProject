@@ -42,7 +42,8 @@ body {
 .navigation-menu {
   color: white;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
   width: 15%;
 }
 
@@ -50,8 +51,12 @@ body {
   list-style: none;
 }
 
+
 .navigation-item a {
   color: white;
+  margin: 0 -5px;
+
+
   text-decoration: none;
   letter-spacing: 3px;
   font-weight: bold;
@@ -84,4 +89,18 @@ ul {
   display: flex;
   justify-content: space-between;
   list-style: none;
+}
+
+button, input[type="submit"] {
+	background: none;
+	color: inherit;
+	/* border: none; */
+	padding: 2px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+b  {
+  color: black;
 }

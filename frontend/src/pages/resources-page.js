@@ -1,6 +1,35 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
+import Popup from '../components/Popup.js';
 
 function ResourcesPage() {
+    const [opened, setOpened] = useState(false);
+    const [databaseInfo, setDatabaseInfo] = useState();
+
+    const toggleWindow = () => {
+        setOpened(!opened);
+    }
+
+    useEffect(() => {
+      
+        const fetchData = async () => {
+          try{
+            
+            fetch(`http://127.0.0.1:8000/api/query7/`)
+              .then(res => res.json())
+              .then(json => {
+                setDatabaseInfo(json);
+                console.log(json.totalGuns);
+            })
+  
+          } catch(error) {
+            console.log("error: ", error);
+          }
+  
+        }
+        
+        fetchData();
+      }, []) 
+
     return(
         <>
             {/* Main Content */}
@@ -20,6 +49,21 @@ function ResourcesPage() {
                         of gun violence in the United States, occurring from January 2013 through 
                         March 2018. 
                         </p>
+                        <button onClick={toggleWindow}>Database Stats</button>
+                        {opened && <Popup 
+                            content={<>
+                                <h1 className="textbox">Database Tuples</h1>
+                                <b className="textbox">totalGuns: {databaseInfo.totalGuns}</b>
+                                <br></br>
+                                <b className="textbox">totalCrimes: {databaseInfo.totalCrimes}</b>
+                                <br></br>
+                                <b className="textbox">totalPeople: {databaseInfo.totalPeople}</b>
+                                <br></br>
+                                <b className="textbox">totalStates: {databaseInfo.totalStates}</b>
+                            </>}
+                            handleClose={toggleWindow}
+                        />}
+                        <br></br>
                         <a href='https://github.com/jamesqo/gun-violence-data'>Link to Gun Violence Archive (GVA)</a>
                         <br></br>
                         <a href='https://github.com/jamesqo/gun-violence-data'>Link to Dataset</a> 

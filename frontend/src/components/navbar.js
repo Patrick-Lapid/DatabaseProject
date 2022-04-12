@@ -17,10 +17,10 @@ function Navbar() {
                 
                     <li className='navigation-item'>
                         <Link to='/data-exploration'>
-                            Data Exploration
+                            Data Exploration    
                         </Link>
                     </li>
-                    
+
                     <li className='navigation-item'>
                         <Link to='/resources'>
                             Resources
