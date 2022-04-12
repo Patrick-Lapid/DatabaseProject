@@ -29,6 +29,8 @@ function Query2() {
           },
         ],
     });
+
+    
     
     useEffect(()=>{
       
@@ -85,7 +87,7 @@ function Query2() {
     // API call based on year
     useEffect(() => {
       const getData = async () => {
-      
+
         // Fetch Suspect data with API call
         fetch(`http://127.0.0.1:8000/api/query2/${year}/`)
           .then(res => res.json())
@@ -98,7 +100,7 @@ function Query2() {
     }, [year]);
 
     const handleYearSelect = (event) => {
-      setYear(event.target.value);
+        setYear(event.target.value);
     }
 
     const handleMapSelect = (event) => {

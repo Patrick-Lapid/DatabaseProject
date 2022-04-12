@@ -6,8 +6,26 @@ const options = {
     legend: {
       display: false
     },
-  }
+  },
+  scales: {
+    y: {
+      display: true,
+      title: {
+        display: true, 
+        text: 'Number of Gun Violence Incidents'
+      }
+    },
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: 'Average Per Capita Annual Income ($)'
+      }
+    }
 }
+}
+
+
 
 function BubbleChart({ chartData }) {
   return <Bubble data={chartData} options = {options}/>;

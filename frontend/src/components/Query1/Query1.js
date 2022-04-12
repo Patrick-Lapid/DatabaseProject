@@ -25,7 +25,7 @@ function Query1() {
             label: "Dead",
             data: ageData.map((data) => data.killed),
             backgroundColor: [
-              "#9E2A2B",
+              "#FEBA55",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -34,7 +34,7 @@ function Query1() {
             label: "Unharmed",
             data: ageData.map((data) => data.unharmed),
             backgroundColor: [
-              "#335C67",
+              "#6D9C9F",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -43,7 +43,7 @@ function Query1() {
             label: "Arrested",
             data: ageData.map((data) => data.arrested),
             backgroundColor: [
-              "#E09F3E",
+              "#EB4A51",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -58,10 +58,10 @@ function Query1() {
           label: "Amount",
           data: suspectData,
           backgroundColor: [
-            "#9E2A2B",
+            "#FEBA55",
+            "#6D9C9F",
+            "#EB4A51",
             "#335C67",
-            "#E09F3E",
-            "#589E27",
           ],
           borderColor: "black",
           borderWidth: 1,
@@ -76,10 +76,10 @@ function Query1() {
           label: "Amount",
           data: victimData,
           backgroundColor: [
-            "#9E2A2B",
+            "#FEBA55",
+            "#6D9C9F",
+            "#EB4A51",
             "#335C67",
-            "#E09F3E",
-            "#589E27",
           ],
           borderColor: "black",
           borderWidth: 1,
@@ -96,7 +96,7 @@ function Query1() {
             label: "Dead",
             data: ageData.map((data) => data.killed),
             backgroundColor: [
-              "#9E2A2B",
+              "#FEBA55",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -105,7 +105,7 @@ function Query1() {
             label: "Unharmed",
             data: ageData.map((data) => data.unharmed),
             backgroundColor: [
-              "#335C67",
+              "#6D9C9F",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -114,7 +114,7 @@ function Query1() {
             label: "Arrested",
             data: ageData.map((data) => data.arrested),
             backgroundColor: [
-              "#E09F3E",
+              "#EB4A51",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -133,10 +133,10 @@ function Query1() {
             label: "Amount",
             data: suspectData,
             backgroundColor: [
-              "#9E2A2B",
+              "#FEBA55",
+              "#6D9C9F",
+              "#EB4A51",
               "#335C67",
-              "#E09F3E",
-              "#589E27",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -151,10 +151,10 @@ function Query1() {
             label: "Amount",
             data: victimData,
             backgroundColor: [
-              "#9E2A2B",
+              "#FEBA55",
+              "#6D9C9F",
+              "#EB4A51",
               "#335C67",
-              "#E09F3E",
-              "#589E27",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -264,7 +264,7 @@ function Query1() {
           <div className="chart-container-1">
             <h2>Age Group Proportions</h2>
             
-            <BarChart1 chartData={barOne} />
+            <BarChart1 chartData={barOne}/>
 
             {/* Toggle date ranges */}
             
@@ -290,7 +290,8 @@ function Query1() {
           </div>
           <div className="chart-container-2">
             <h2>Suspect</h2>
-            <PieChart1 chartData={pieOne} />
+            <PieChart1 chartData={pieOne} 
+            />
           </div>
           <div className="chart-container-3">
             <h2>Victim</h2>

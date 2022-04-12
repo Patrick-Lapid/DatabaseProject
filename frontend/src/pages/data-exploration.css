@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 2%
 }
 
 .main-container {
@@ -7,30 +8,26 @@
   justify-content: space-between;
 }
 
-.main-container > div {
+.main-container {
   padding: 0px 10px;
 }
 
 .chart-container-1 {
-  height: 800px;
   flex: 0 0 auto;
-  width: 30%;
+  width: 40%;
 }
 
 .chart-container-2 {
-  height: 800px;
   flex: 0 0 auto;
-  width: 30%;
+  width: 28%;
 }
 
 .chart-container-3 {
-  height: 800px;
   flex: 0 0 auto;
-  width: 30%;
+  width: 28%;
 }
 
 .chart-container-4 {
-  height: 800px;
   flex: 0 0 auto;
   width: 50%;
 }
@@ -42,4 +39,14 @@
 
 .chart-container-6 {
   margin-left: 450px;
+}
+
+.chart-container-7 {
+  flex: 0 0 auto;
+  width: 60%
+}
+
+.paragraph {
+  margin-top: 50px;
+  margin-bottom: 200px;
 }

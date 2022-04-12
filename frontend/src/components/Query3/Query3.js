@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PieChart1 from "./PieChart1";
 import { QueryOneSuspect } from '../../Data';
+import BarChart2 from './BarChart2';
 
 function Query3() {
 
@@ -11,6 +12,40 @@ function Query3() {
   const[fromYear, setFromYear] = useState(2013);
   const[toYear, setToYear] = useState(2018);
 
+  const [barTwo, setBarTwo] = useState({
+    labels: ['Victums of Male Shooters', 'Victums of Female Shooters'],
+    datasets: [
+      {
+        label: "Female",
+        data: [0, 0],
+        backgroundColor: [
+          "#FEBA55",
+        ],
+        borderColor: "black",
+        borderWidth: 1,
+      },
+      {
+        label: "Male",
+        data: [0, 0],
+        backgroundColor: [
+          "#6D9C9F",
+        ],
+        borderColor: "black",
+        borderWidth: 1,
+      },
+      {
+        label: "Unknown",
+        data: [0, 0],
+        backgroundColor: [
+          "#EB4A51",
+        ],
+        borderColor: "black",
+        borderWidth: 1,
+      },
+    ]
+
+  });
+
   const [pieOne, setPieOne] = useState({
     labels: ['Female Victims', 'Male Victims'],
     datasets: [
@@ -18,10 +53,10 @@ function Query3() {
         labels: "Amount",
         data: [],
         backgroundColor: [
-          "#9E2A2B",
+          "#FEBA55",
+          "#6D9C9F",
+          "#EB4A51",
           "#335C67",
-          "#E09F3E",
-          "#589E27",
         ],
         borderColor: "black",
         borderWidth: 1,
@@ -29,41 +64,76 @@ function Query3() {
     ],
   });
 
-  const [pieTwo, setPieTwo] = useState({
-    labels: ['Female Victims', 'Male Victims'],
-    datasets: [
-      {
-        label: "Amount",
-        data: [],
-        backgroundColor: [
-          "#9E2A2B",
-          "#335C67",
-          "#E09F3E",
-          "#589E27",
-        ],
-        borderColor: "black",
-        borderWidth: 1,
-      },
-    ],
-  });
+  // const [pieTwo, setPieTwo] = useState({
+  //   labels: ['Female Victims', 'Male Victims'],
+  //   datasets: [
+  //     {
+  //       label: "Amount",
+  //       data: [],
+  //       backgroundColor: [
+  //         "#335C67",
+  //         "#FEBA55",
+  //         "#6D9C9F",
+  //         "#EB4A51",
+  //       ],
+  //       borderColor: "black",
+  //       borderWidth: 1,
+  //     },
+  //   ],
+  // });
 
-  const [pieThree, setPieThree] = useState({
-    labels: ['Female Victims', 'Male Victims'],
+  // const [pieThree, setPieThree] = useState({
+  //   labels: ['Female Victims', 'Male Victims'],
+  //   datasets: [
+  //     {
+  //       label: "Amount",
+  //       data: [],
+  //       backgroundColor: [
+  //         "#335C67",
+  //         "#FEBA55",
+  //         "#6D9C9F",
+  //         "#EB4A51",
+  //       ],
+  //       borderColor: "black",
+  //       borderWidth: 1,
+  //     },
+  //   ],
+  // });
+
+  useEffect(() => {
+    setBarTwo({
+      labels: ['Victums of Male Shooters', 'Victums of Female Shooters'],
     datasets: [
       {
-        label: "Amount",
-        data: [],
+        label: "Female",
+        data: [maleData.femaleVictimsRatio, femaleData.femaleVictimsRatio],
         backgroundColor: [
-          "#9E2A2B",
-          "#335C67",
-          "#E09F3E",
-          "#589E27",
+          "#FEBA55",
         ],
         borderColor: "black",
         borderWidth: 1,
       },
-    ],
-  });
+      {
+        label: "Male",
+        data: [maleData.maleVictimsRatio, femaleData.maleVictimsRatio],
+        backgroundColor: [
+          "#6D9C9F",
+        ],
+        borderColor: "black",
+        borderWidth: 1,
+      },
+      {
+        label: "Unknown",
+        data: [maleData.unknownVictimsRatio, femaleData.unknownVictimsRatio],
+        backgroundColor: [
+          "#EB4A51",
+        ],
+        borderColor: "black",
+        borderWidth: 1,
+      },
+    ]
+    })
+  }, [maleData,femaleData]);
 
   // Updates Chart 1 on API call
   useEffect(() => {
@@ -73,12 +143,12 @@ function Query3() {
       datasets: [
         {
           labels: "Amount",
-          data: [totalData.femaleVictimsRatio, totalData.maleVictimsRatio, totalData.unknownVictimsRatio ], // fix this
+          data: [totalData.femaleVictimsRatio*100, totalData.maleVictimsRatio*100, totalData.unknownVictimsRatio*100], // fix this
           backgroundColor: [
-            "#9E2A2B",
+            "#FEBA55",
+            "#6D9C9F",
+            "#EB4A51",
             "#335C67",
-            "#E09F3E",
-            "#589E27",
           ],
           borderColor: "black",
           borderWidth: 1,
@@ -87,46 +157,46 @@ function Query3() {
     })
   }, [totalData]);
   // Updates Chart 2 on API call
-  useEffect(() => {
-    setPieTwo({
-      labels: ['Female Victims', 'Male Victims', 'Unknown'],
-      datasets: [
-        {
-          label: "Amount",
-          data: [maleData.femaleVictimsRatio, maleData.maleVictimsRatio, maleData.unknownVictimsRatio ], // Change this
-          backgroundColor: [
-            "#9E2A2B",
-            "#335C67",
-            "#E09F3E",
-            "#589E27",
-          ],
-          borderColor: "black",
-          borderWidth: 1,
-        },
-      ],
-    })
-  }, [maleData]);
+  // useEffect(() => {
+  //   setPieTwo({
+  //     labels: ['Female Victims', 'Male Victims', 'Unknown'],
+  //     datasets: [
+  //       {
+  //         label: "Amount",
+  //         data: [maleData.femaleVictimsRatio, maleData.maleVictimsRatio, maleData.unknownVictimsRatio ], // Change this
+  //         backgroundColor: [
+  //           "#335C67",
+  //           "#335C67",
+  //           "#E09F3E",
+  //           "#589E27",
+  //         ],
+  //         borderColor: "black",
+  //         borderWidth: 1,
+  //       },
+  //     ],
+  //   })
+  // }, [maleData]);
 
-  // Updates Chart 3 on API call
-  useEffect(() => {
-    setPieThree({
-      labels: ['Female Victims', 'Male Victims', 'Unknown'],
-      datasets: [
-        {
-          label: "Amount",
-          data: [femaleData.femaleVictimsRatio, femaleData.maleVictimsRatio, femaleData.unknownVictimsRatio ], // change to femaleData.
-          backgroundColor: [
-            "#9E2A2B",
-            "#335C67",
-            "#E09F3E",
-            "#589E27",
-          ],
-          borderColor: "black",
-          borderWidth: 1,
-        },
-      ],
-    })
-  }, [femaleData]);
+  // // Updates Chart 3 on API call
+  // useEffect(() => {
+  //   setPieThree({
+  //     labels: ['Female Victims', 'Male Victims', 'Unknown'],
+  //     datasets: [
+  //       {
+  //         label: "Amount",
+  //         data: [femaleData.femaleVictimsRatio, femaleData.maleVictimsRatio, femaleData.unknownVictimsRatio ], // change to femaleData.
+  //         backgroundColor: [
+  //           "#335C67",
+  //           "#335C67",
+  //           "#E09F3E",
+  //           "#589E27",
+  //         ],
+  //         borderColor: "black",
+  //         borderWidth: 1,
+  //       },
+  //     ],
+  //   })
+  // }, [femaleData]);
   
   // Calls API on change of year values
   useEffect(() => {
@@ -168,19 +238,15 @@ function Query3() {
   return (
     <div>
       <div className="main-container">
-        <div className='chart-container-1'>
-          <h1>Percent of Female Victims vs Male Victims</h1>
+        <div className='chart-container-3'>
+          <h1>Overall Percent of Female Victims vs Male Victims</h1>
           <PieChart1 chartData={pieOne} />
         </div>
-        <div className='chart-container-2'>
-          <h1>Percent of Victims (by gender) Shot by Males</h1>
-          <PieChart1 chartData={pieTwo} />
-        </div>
-        <div className='chart-container-3'>
-          <h1>Percent of Victims (by gender) Shot by Females</h1>
-          <PieChart1 chartData={pieThree} />
-        </div>
-      </div>
+        <div className="chart-container-7">
+        <h1>
+          Proportions of Victums By Male and Female Shooters
+        </h1>
+        <BarChart2 chartData={barTwo}/>
       <select onChange={handleFromSelect}>
         <option disabled>From</option>
         <option value="2013">2013</option>
@@ -199,6 +265,8 @@ function Query3() {
         <option value="2017">2017</option>
         <option value="2018">2018</option>
       </select>
+    </div>
+    </div>
     </div>
   )
 }

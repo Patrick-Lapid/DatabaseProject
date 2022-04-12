@@ -8,17 +8,17 @@ const options = {
         display: true,
         title: {
           display: true, 
-          text: 'Proportion of People Involved in Gun Incident'
+          text: 'Proportion of Victims'
         }
       }
     }
   };
 
-function BarChart1({ chartData }) {
+function BarChart2({ chartData }) {
   return <Bar 
     data={chartData} 
     options={options}
     />;
 }
 
-export default BarChart1;
+export default BarChart2;

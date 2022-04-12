@@ -45,6 +45,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 15%;
+  flex: 0 0 auto
 }
 
 .navigation-menu li {

@@ -7,7 +7,7 @@ function LandingPage() {
             <section className="landing-main">
                 <div className='flex-container'>
                     <div className='container-item'>
-                        <h1>Gun Violence in the United States: Data Exploration</h1>
+                        <h1 style={{color:'white'}}>Gun Violence in the United States: Data Exploration</h1>
                         <p>
                         This web app is intended to provide visual data exploration and 
                         organized trend display on gun violence in the United States. 
