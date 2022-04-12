@@ -248,6 +248,28 @@ def query6(request, num1, num2, ptype, month1, year1, month2, year2):
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@csrf_exempt
+def query7(request):
+    if (request.method == 'GET'):
+        cursor = connection.cursor()
+        q = "SELECT COUNT(*) FROM API_GUN;"
+        cursor.execute(q)
+        totalGuns = cursor.fetchone()[0]
+        q = "SELECT COUNT(*) FROM API_CRIME;"
+        cursor.execute(q)
+        totalCrimes = cursor.fetchone()[0]
+        q = "SELECT COUNT(*) FROM API_PERSON;"
+        cursor.execute(q)
+        totalPeople = cursor.fetchone()[0]
+        q = "SELECT COUNT(*) FROM API_STATE;"
+        cursor.execute(q)
+        totalStates = cursor.fetchone()[0]
+
+        q7 = Query7(totalGuns, totalCrimes, totalPeople, totalStates)
+        serializer = Query7Serializer(q7)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 # class GunListView(generics.ListAPIView):
 #     queryset = Gun.objects.raw('SELECT * FROM api_gun FETCH NEXT 5 ROWS ONLY')
 #     serializer_class = GunSerializer

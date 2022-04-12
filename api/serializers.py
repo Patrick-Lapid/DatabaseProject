@@ -37,6 +37,12 @@ class Query6Serializer(serializers.Serializer):
    age2 = serializers.IntegerField()
    count = serializers.IntegerField()
 
+class Query7Serializer(serializers.Serializer):
+   totalGuns = serializers.IntegerField()
+   totalCrimes = serializers.IntegerField()
+   totalPeople = serializers.IntegerField()
+   totalStates = serializers.IntegerField()
+
 # class GunSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Gun

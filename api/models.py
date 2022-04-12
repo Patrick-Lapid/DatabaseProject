@@ -43,6 +43,13 @@ class Query6:
         self.age2 = age2
         self.count = count
 
+class Query7:
+    def __init__(self, totalGuns, totalCrimes, totalPeople, totalStates):
+        self.totalGuns = totalGuns
+        self.totalCrimes = totalCrimes
+        self.totalPeople = totalPeople
+        self.totalStates = totalStates
+
 class Gun(models.Model):
     STOLEN_CHOICES = [('Unknown','Unknown'), ('Notstolen','Not-Stolen'), ('Stolen','Stolen')]
     gunID = models.IntegerField(primary_key=True)

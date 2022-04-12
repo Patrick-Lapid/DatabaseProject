@@ -8,6 +8,7 @@ urlpatterns = [
     path('query4/<str:state>/', query4),
     path('query5/<int:year1>/<int:year2>/', query5),
     path('query6/<int:num1>/<int:num2>/<str:ptype>/<int:month1>/<int:year1>/<int:month2>/<int:year2>/', query6),
+    path('query7/', query7),
     # path('crime/', CrimeListView.as_view()),
     # path('person/', PersonListView.as_view()),
     # path('state/', StateListView.as_view()),
