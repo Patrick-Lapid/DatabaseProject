@@ -22,7 +22,7 @@ function Query2() {
             // Income = x, Incidents = y,
             data: [],
             backgroundColor: [
-              "#000080",
+              "#FF0000",
             ],
             borderColor: "black",
             borderWidth: 1,
@@ -40,8 +40,8 @@ function Query2() {
         scatterPoints.push({
           label: state,
           data:[{ "x": numIncidents, "y": medianIncome}],
-          backgroundColor: ["#000080"],
-          borderColor: "black",
+          backgroundColor: ["#FF0000"],
+          borderColor: "#FFC0CB",
           borderWidth: 0.5,
         })
         
@@ -121,8 +121,10 @@ function Query2() {
 
             <div className='chart-container-5'>
                 <h2>Gun Violence by State</h2>
-                {isLoading && <img src={Spinner}></img>}
-                {!isLoading && <img src={imgSrc} key={imgSrc}></img>}
+                <div className='mapImage'> 
+                  {isLoading && <img src={Spinner}></img>}
+                  {!isLoading && <img src={imgSrc} key={imgSrc}></img>}
+                </div>
                 <select onChange={handleMapSelect}>
                   <option value="2014">2014</option>
                   <option value="2015">2015</option>
