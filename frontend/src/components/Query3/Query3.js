@@ -13,7 +13,7 @@ function Query3() {
   const[toYear, setToYear] = useState(2018);
 
   const [barTwo, setBarTwo] = useState({
-    labels: ['Victums of Male Shooters', 'Victums of Female Shooters'],
+    labels: ['Victims of Male Shooters', 'Victims of Female Shooters'],
     datasets: [
       {
         label: "Female",
@@ -102,7 +102,7 @@ function Query3() {
 
   useEffect(() => {
     setBarTwo({
-      labels: ['Victums of Male Shooters', 'Victums of Female Shooters'],
+      labels: ['Victims of Male Shooters', 'Victims of Female Shooters'],
     datasets: [
       {
         label: "Female",
@@ -244,7 +244,7 @@ function Query3() {
         </div>
         <div className="chart-container-7">
         <h1>
-          Proportions of Victums By Male and Female Shooters
+          Proportions of Victims By Male and Female Shooters
         </h1>
         <BarChart2 chartData={barTwo}/>
       <select onChange={handleFromSelect}>

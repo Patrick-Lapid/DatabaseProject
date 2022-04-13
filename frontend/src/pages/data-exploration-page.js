@@ -11,7 +11,7 @@ function DataExplorationPage() {
   return (
     <div className="App">
       <h1>Trends in Outcome Status of Suspects and Victims by Age Range</h1>
-      <h3>Which age group is most likely to be injured, dead, arrested, unharmed? How does that overall proportion of victims and suspects compare across age ranges</h3>
+      <h3>Which age group is most likely to be injured, dead, arrested, unharmed? How does that overall proportion of victims and suspects compare across age ranges?</h3>
       <div>
       <Query1 />
       <p className='paragraph'>

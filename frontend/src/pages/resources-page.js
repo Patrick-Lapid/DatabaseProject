@@ -38,7 +38,7 @@ function ResourcesPage() {
                     <h1>Analysis of Gun Violence in the United States</h1>
                     <div className='container-item'>
                         <h2>
-                            Desription of Dataset:
+                            Description of Dataset:
                         </h2>
                         <p>
                         The data that we have selected comes from Gun Violence Archive (GVA), 
@@ -52,7 +52,7 @@ function ResourcesPage() {
                         <button onClick={toggleWindow}>Database Stats</button>
                         {opened && <Popup 
                             content={<>
-                                <h1 className="textbox">Database Tuples</h1>
+                                <h4 className="textbox">Database Tuples</h4>
                                 <b className="textbox">totalGuns: {databaseInfo.totalGuns}</b>
                                 <br></br>
                                 <b className="textbox">totalCrimes: {databaseInfo.totalCrimes}</b>
@@ -64,7 +64,7 @@ function ResourcesPage() {
                             handleClose={toggleWindow}
                         />}
                         <br></br>
-                        <a href='https://github.com/jamesqo/gun-violence-data'>Link to Gun Violence Archive (GVA)</a>
+                        <a href='https://www.gunviolencearchive.org/'>Link to Gun Violence Archive (GVA)</a>
                         <br></br>
                         <a href='https://github.com/jamesqo/gun-violence-data'>Link to Dataset</a> 
                     </div>
@@ -74,13 +74,9 @@ function ResourcesPage() {
 
                         <h3>Purpose:</h3>
                         <p>
-                        In the United States, gun violence has dominated headlines, conversation, 
-                        and political debates for decades. Incidents involving gun violence have 
-                        continued to contribute to the emotional and persistent debate over the amount 
-                        and control of guns in the United States. Gun violence in America affects all of 
-                        us in some way, and recently has become way too established and familiar in our 
-                        society. Our web app and group’s main goal is to bring about awareness to a seemingly 
-                        impossible to solve issue in the United States: gun violence.
+
+                        In the United States, gun violence has dominated headlines, conversation, and political debates for decades. Incidents involving gun violence have continued to contribute to the emotional and persistent debate over the amount and control of guns in the United States. Gun violence in America affects all of us in some way, and recently has become way too established and familiar in our  society. By administering this tool for comprehensible data analysis on gun-violence, the hope is that the app will equip users to form more educated opinions on gun safety concerns and develop a better understanding of the relationships involved in these incidents.
+
                         </p>
 
                         <h4>Authors:</h4>

@@ -48,6 +48,15 @@ function Query1() {
             borderColor: "black",
             borderWidth: 1,
           },
+          {
+            label: "Injured",
+            data: ageData.map((data) => data.injured),
+            backgroundColor: [
+              "#335C67",
+            ],
+            borderColor: "black",
+            borderWidth: 1,
+          },
         ],
       });
       
@@ -115,6 +124,15 @@ function Query1() {
             data: ageData.map((data) => data.arrested),
             backgroundColor: [
               "#EB4A51",
+            ],
+            borderColor: "black",
+            borderWidth: 1,
+          },
+          {
+            label: "Injured",
+            data: ageData.map((data) => data.injured),
+            backgroundColor: [
+              "#335C67",
             ],
             borderColor: "black",
             borderWidth: 1,

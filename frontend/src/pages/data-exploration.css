@@ -38,7 +38,8 @@
 }
 
 .chart-container-6 {
-  margin-left: 450px;
+  flex: 0 0 auto;
+  margin-left: 600px;
 }
 
 .chart-container-7 {
