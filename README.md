@@ -1,5 +1,9 @@
 # DatabaseProject
 
+In the United States, gun violence has dominated headlines, conversation, and political debates for decades. Incidents involving gun violence have continued to contribute to the emotional and persistent debate over the amount and control of guns in the United States. Gun violence in America affects all of us in some way, and recently has become way too established and familiar in our  society. By administering this tool for comprehensible data analysis on gun-violence, the hope is that the app will equip users to form more educated opinions on gun safety concerns and develop a better understanding of the relationships involved in these incidents.
+
+#
+
 ![website2](https://user-images.githubusercontent.com/53315150/163247647-ff50253f-d1a0-4774-8010-a1f2aa29a0ff.png)
 
 #
